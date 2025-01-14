@@ -10,3 +10,6 @@ class ActivationFunctionErrors(NeuralNetworksErrors):
 
 class InternalErrors(LittleNeuErrors):
     pass
+
+class LittleNeuNotImplementedError(LittleNeuErrors):
+    pass
