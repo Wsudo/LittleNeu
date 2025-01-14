@@ -3,20 +3,7 @@ import numpy
 from .loss_function import RegressionLossFunction
 
 
-class MSELoss(RegressionLossFunction):
-    """The MSE loss is computed by first calculating the squared differences between the true values and the predicted values, and then taking the average of these squared differences.
-
-    Args:
-        y_true (numpy.ndarray | list): true values
-        y_pred (numpy.ndarray | list): network generated values
-
-    Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
-
-    Returns:
-        numpy.ndarray: loss between `True Values` and `Predicted Values`
-    """
+class MAELoss(RegressionLossFunction):
 
     def __init__(self):
         super().__init__()
@@ -26,7 +13,7 @@ class MSELoss(RegressionLossFunction):
         y_true: numpy.ndarray | list,
         y_pred: numpy.ndarray | list,
     ) -> numpy.ndarray:
-        """The MSE loss is computed by first calculating the squared differences between the true values and the predicted values, and then taking the average of these squared differences.
+        """The MAE loss is computed by taking the absolute difference between the true values and the predicted values and then averaging these differences.
 
         Args:
             y_true (numpy.ndarray | list): true values
@@ -47,14 +34,16 @@ class MSELoss(RegressionLossFunction):
         real_y_true = y_true if isinstance(y_true, numpy.ndarray) else numpy.array(y_true)
         real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
 
-        return numpy.mean((y_true - y_pred) * 2)
+        abs_diff = numpy.abs(real_y_true, real_y_pred)
+
+        return numpy.mean(abs_diff)
 
 
-def mse_loss(
+def mae_loss(
     y_true: numpy.ndarray | list = None,
     y_pred: numpy.ndarray | list = None,
-) -> MSELoss | numpy.ndarray:
-    """The MSE loss is computed by first calculating the squared differences between the true values and the predicted values, and then taking the average of these squared differences.
+) -> MAELoss | numpy.ndarray:
+    """The MAE loss is computed by taking the absolute difference between the true values and the predicted values and then averaging these differences.
 
     Args:
         y_true (numpy.ndarray | list): true values
@@ -66,6 +55,5 @@ def mse_loss(
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
-        MSELoss: if `y_true == None and y_pred == None` the object of `MSELoss` will return
     """
-    return MSELoss() if y_true == None and y_pred == None else MSELoss().calc(y_true, y_pred)
+    return MAELoss() if y_true == None and y_pred == None else MAELoss().calc(y_true, y_pred)
