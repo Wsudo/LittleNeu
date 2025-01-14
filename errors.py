@@ -5,6 +5,6 @@ class LittleNeuErrors(Exception , BaseException):
 class NeuralNetworksErrors(LittleNeuErrors):
     pass
 
-class ActivationFunctionError(NeuralNetworksErrors):
+class ActivationFunctionErrors(NeuralNetworksErrors):
     pass
 
