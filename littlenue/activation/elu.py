@@ -93,7 +93,7 @@ def elu(x: numpy.ndarray | list = None, alpha: float = 1.0) -> ELU | numpy.ndarr
         numpy.ndarray: output of the `ELU(x)`
         ELU: if `x == None` the object of `ELU` will return
     """
-    return ELU(alpha=alpha) if x == None else ELU(alpha=alpha).forward(x)
+    return ELU(alpha=alpha) if x is None else ELU(alpha=alpha).forward(x)
 
 
 def elu_derivation(x: numpy.ndarray | list, alpha: float = 1.0) -> numpy.ndarray:
@@ -126,7 +126,7 @@ def exponential_linear_unit(x: numpy.ndarray | list = None, alpha: float = 1.0) 
         numpy.ndarray: output of the `ELU(x)`
         ELU: if `x == None` the object of `ELU` will return
     """
-    return ExponentialLinearUnit(alpha=alpha) if x == None else ExponentialLinearUnit(alpha=alpha).forward(x)
+    return ExponentialLinearUnit(alpha=alpha) if x is None else ExponentialLinearUnit(alpha=alpha).forward(x)
 
 
 def exponential_linear_unit_derivation(x: numpy.ndarray | list, alpha: float = 1.0) -> numpy.ndarray:

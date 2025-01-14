@@ -69,7 +69,7 @@ def hardsigmoid(x: numpy.ndarray | list = None) -> HardSigmoid | numpy.ndarray:
         numpy.ndarray: output of `HardSigmoid(x)`
         HardSigmoid: if `x == None` the object of `HardSigmoid` will return
     """
-    return HardSigmoid() if x == None else HardSigmoid().forward(x)
+    return HardSigmoid() if x is None else HardSigmoid().forward(x)
 
 
 def hardsigmoid_derivation(x: numpy.ndarray | list) -> numpy.ndarray:

@@ -75,7 +75,7 @@ def hardswish(x: numpy.ndarray | list = None) -> HardSwish | numpy.ndarray:
         numpy.ndarray: output of the `HardSwish(x)`
         HardSwish: if `x == None` the object of `HardSwish` will return
     """
-    return HardSwish() if x == None else HardSwish().forward(x)
+    return HardSwish() if x is None else HardSwish().forward(x)
 
 
 def hardswish_derivation(x: numpy.ndarray | list) -> numpy.ndarray:

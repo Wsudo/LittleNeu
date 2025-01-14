@@ -72,7 +72,7 @@ def leaky_relu(x: numpy.ndarray | list = None, alpha: float = 0.01) -> LeakyRelu
     Returns:
         numpy.ndarray: output of the function `LeakyRelu(x)`
     """
-    return LeakyRelu(alpha=alpha) if x == None else LeakyRelu(alpha=alpha).forward(x)
+    return LeakyRelu(alpha=alpha) if x is None else LeakyRelu(alpha=alpha).forward(x)
 
 
 def leaky_relu_derivation(x: numpy.ndarray | list = None, alpha: float = 0.01) -> numpy.ndarray:

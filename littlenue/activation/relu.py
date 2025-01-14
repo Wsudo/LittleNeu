@@ -66,7 +66,7 @@ def relu(x: numpy.ndarray | list = None) -> Relu | numpy.ndarray:
     Returns:
         numpy.ndarray: output of the `Relu(x)` == `max(0,x)`
     """
-    return Relu() if x == None else Relu().forward(x)
+    return Relu() if x is None else Relu().forward(x)
 
 
 def relu_derivation(x: numpy.ndarray | list) -> numpy.ndarray:

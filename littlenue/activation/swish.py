@@ -73,7 +73,7 @@ def swish(x: numpy.ndarray | list = None) -> Swish | numpy.ndarray:
         numpy.ndarray: output of the `Swish(x)`
         Swish: if `x==None` the object of `Swish` will return
     """
-    return Swish() if x == None else Swish().forward()
+    return Swish() if x is None else Swish().forward()
 
 
 def swish_derivation(x: numpy.ndarray | list = None) -> numpy.ndarray:
