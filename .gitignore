@@ -169,3 +169,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# region May Git Ignore
+.route-map.txt
+# end region My Git Ignore
