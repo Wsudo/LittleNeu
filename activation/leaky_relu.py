@@ -8,6 +8,7 @@ class LeakyRelu(ActivationFunction):
 
     Args:
         x (numpy.ndarray | list): the input to the function
+        alpha (float): the `α(alpha)` value , `(commonly 0.01)`.
 
     Raises:
         ValueError: if `x` is not in (list, numpy.ndarray) types
@@ -25,6 +26,7 @@ class LeakyRelu(ActivationFunction):
 
         Args:
             x (numpy.ndarray | list): the input to the function
+            alpha (float): the `α(alpha)` value , `(commonly 0.01)`.
 
         Raises:
             ValueError: if `x` is not in (list, numpy.ndarray) types
