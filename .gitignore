@@ -175,4 +175,8 @@ cython_debug/
 tmp_tests.py
 .tmp_tests.py
 tmp_tests
+TODO
+.TODO
+TODO.txt
+.TODO.txt
 # end region My Git Ignore
