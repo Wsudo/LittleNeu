@@ -1,6 +1,6 @@
 import numpy
 
-from .loss_function import ClassificationLossFunction, MultiLabelLossFunction
+from .loss_function import ClassificationLossFunction, MultiLabelLossFunction, ImbalancedClassificationLossFunction
 
 
 class CrossEntropyLoss(ClassificationLossFunction):
@@ -235,6 +235,71 @@ class MultiLabelCrossEntropyLoss(ClassificationLossFunction, MultiLabelLossFunct
         return loss
 
 
+class WeightedCrossEntropyLoss(ClassificationLossFunction, ImbalancedClassificationLossFunction):
+    """Weighted Cross-Entropy Loss is often used when you want to apply different weights to each class to address class imbalance. It can be applied to both binary classification (with multiple classes) or multi-class classification (with class weights assigned to each class).
+
+    In Weighted Cross-Entropy Loss, the basic idea is to scale the cross-entropy loss for each sample based on the weight assigned to the true class.
+
+    Args:
+        y_true (numpy.ndarray | list): true values
+        y_pred (numpy.ndarray | list): network generated values
+        class_weights (numpy.ndarray|list):iThese are weights assigned to each class. Higher weights can be given to underrepresented classes to handle class imbalance.
+        class_weights (numpy.ndarray|list):In the example, class 0 has a weight of 1.0, class 1 has a weight of 2.0, and class 2 has a weight of 1.5.
+
+    Raises:
+        ValueError: when y_true is not type (list , numpy.ndarray)
+        ValueError: when y_pred is not type (list , numpy.ndarray)
+
+    Returns:
+        numpy.ndarray: loss between `True Values` and `Predicted Values`
+    """
+
+    def __init__(self, class_weights: numpy.ndarray | list):
+        super().__init__()
+
+        self.class_weights = class_weights if isinstance(class_weights, numpy.ndarray) else numpy.array(class_weights)
+
+    def calc(
+        self,
+        y_true: numpy.ndarray | list,
+        y_pred: numpy.ndarray | list,
+    ) -> numpy.ndarray:
+        """Weighted Cross-Entropy Loss is often used when you want to apply different weights to each class to address class imbalance. It can be applied to both binary classification (with multiple classes) or multi-class classification (with class weights assigned to each class).
+
+        In Weighted Cross-Entropy Loss, the basic idea is to scale the cross-entropy loss for each sample based on the weight assigned to the true class.
+
+        Args:
+            y_true (numpy.ndarray | list): true values
+            y_pred (numpy.ndarray | list): network generated values
+            class_weights (numpy.ndarray|list):iThese are weights assigned to each class. Higher weights can be given to underrepresented classes to handle class imbalance.
+            class_weights (numpy.ndarray|list):In the example, class 0 has a weight of 1.0, class 1 has a weight of 2.0, and class 2 has a weight of 1.5.
+
+        Raises:
+            ValueError: when y_true is not type (list , numpy.ndarray)
+            ValueError: when y_pred is not type (list , numpy.ndarray)
+
+        Returns:
+            numpy.ndarray: loss between `True Values` and `Predicted Values`
+        """
+        if not isinstance(y_true, numpy.ndarray) and not isinstance(y_true, list):
+            raise ValueError(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
+        if not isinstance(y_pred, numpy.ndarray) and not isinstance(y_pred, list):
+            raise ValueError(f"{type(self)}.calc 'y_pred' argument must be type (list , numpy.ndarray) , {type(y_pred)} passed !")
+
+        real_y_true = y_true if isinstance(y_true, numpy.ndarray) else numpy.array(y_true)
+        real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
+
+        # Clip predictions to avoid log(0) which leads to NaN or infinity
+        real_y_pred = numpy.clip(real_y_pred, 1e-15, 1 - 1e-15)
+
+        # Calculate Weighted Cross-Entropy loss
+        # Apply class weights to the true class labels
+        loss = -numpy.sum(self.class_weights[real_y_true] * numpy.log(real_y_pred[numpy.arange(len(real_y_true)), real_y_true]), axis=1)
+
+        # Return the mean loss
+        return numpy.mean(loss)
+
+
 class BinaryCrossEntropyLoss(CrossEntropyLoss):
     """We clip the predictions to avoid taking the logarithm of 0, which is undefined. The clipping ensures predictions are in the range `[1e−15,1−1e−15]`.
     The binary cross-entropy is calculated for each sample, and the mean is returned.
@@ -406,3 +471,28 @@ def multilabel_cross_entropy_loss(
         numpy.ndarray: loss between `True Values` and `Predicted Values`
     """
     return MultiLabelCrossEntropyLoss() if y_true is None and y_pred is None else MultiLabelCrossEntropyLoss().calc(y_true, y_pred)
+
+
+def multilabel_cross_entropy_loss(
+    y_true: numpy.ndarray | list = None,
+    y_pred: numpy.ndarray | list = None,
+    class_weights: numpy.ndarray | list = None,
+) -> WeightedCrossEntropyLoss | numpy.ndarray:
+    """Weighted Cross-Entropy Loss is often used when you want to apply different weights to each class to address class imbalance. It can be applied to both binary classification (with multiple classes) or multi-class classification (with class weights assigned to each class).
+
+    In Weighted Cross-Entropy Loss, the basic idea is to scale the cross-entropy loss for each sample based on the weight assigned to the true class.
+
+    Args:
+        y_true (numpy.ndarray | list): true values
+        y_pred (numpy.ndarray | list): network generated values
+        class_weights (numpy.ndarray|list):iThese are weights assigned to each class. Higher weights can be given to underrepresented classes to handle class imbalance.
+        class_weights (numpy.ndarray|list):In the example, class 0 has a weight of 1.0, class 1 has a weight of 2.0, and class 2 has a weight of 1.5.
+
+    Raises:
+        ValueError: when y_true is not type (list , numpy.ndarray)
+        ValueError: when y_pred is not type (list , numpy.ndarray)
+
+    Returns:
+        numpy.ndarray: loss between `True Values` and `Predicted Values`
+    """
+    return WeightedCrossEntropyLoss(class_weights=class_weights) if y_true is None and y_pred is None else WeightedCrossEntropyLoss(class_weights=class_weights).calc(y_true, y_pred)
