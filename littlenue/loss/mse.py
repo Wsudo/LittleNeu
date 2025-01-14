@@ -66,5 +66,6 @@ def mse_loss(
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
+        MSELoss: if `y_true == None and y_pred == None` the object of `MSELoss` will return
     """
     return MSELoss() if y_true == None and y_pred == None else MSELoss().calc(y_true, y_pred)
