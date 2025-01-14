@@ -69,7 +69,7 @@ def sigmoid(x: numpy.ndarray | list = None) -> Sigmoid | numpy.ndarray:
         numpy.ndarray: output of sigmoid(`x`) in range `(0,1)`
         Sigmoid: when no input passed , the object of `Sigmoid` will returned
     """
-    return Sigmoid() if x == None else Sigmoid().forward(x)
+    return Sigmoid() if x is None else Sigmoid().forward(x)
 
 
 def sigmoid_derivate(x: numpy.ndarray | list) -> numpy.ndarray:

@@ -89,7 +89,7 @@ def prelu(x: numpy.ndarray | list = None, alpha: float = 0.1) -> PRelu | numpy.n
     Returns:
         numpy.ndarray: output of the function `PRelu(x)`
     """
-    return PRelu(alpha=alpha) if x == None else PRelu(alpha=alpha).forward(x)
+    return PRelu(alpha=alpha) if x is None else PRelu(alpha=alpha).forward(x)
 
 
 def prelu_derivation(x: numpy.ndarray | list = None, alpha: float = 0.1) -> numpy.ndarray:
@@ -121,7 +121,7 @@ def parametric_relu(x: numpy.ndarray | list = None, alpha: float = 0.1) -> PRelu
     Returns:
         numpy.ndarray: output of the function `PRelu(x)`
     """
-    return PRelu(alpha=alpha) if x == None else PRelu(alpha=alpha).forward(x)
+    return PRelu(alpha=alpha) if x is None else PRelu(alpha=alpha).forward(x)
 
 
 def parametric_relu_derivation(x: numpy.ndarray | list = None, alpha: float = 0.1) -> numpy.ndarray:

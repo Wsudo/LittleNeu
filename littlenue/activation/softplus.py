@@ -72,7 +72,7 @@ def softplus(x: numpy.ndarray | list = None) -> Softplus | numpy.ndarray:
         numpy.ndarray: output of the `SoftPlus(x)`
         Softplus: if `x == None` the object of the `Softplus` will return
     """
-    return Softplus() if x == None else Softplus().forward(x)
+    return Softplus() if x is None else Softplus().forward(x)
 
 
 def softplus_derivation(x: numpy.ndarray | list) -> numpy.ndarray:

@@ -1,6 +1,6 @@
 import numpy
 
-from errors import LittleNeuNotImplementedError
+from ..errors import LittleNeuNotImplementedError
 
 class ActivationFunction:
 

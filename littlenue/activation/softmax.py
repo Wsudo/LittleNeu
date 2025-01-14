@@ -79,7 +79,7 @@ def softmax(x: numpy.ndarray | list = None) -> Softmax | numpy.ndarray:
         numpy.ndarray: output of the `Softmax(x)`
         Softmax: if `x== None` object of `Softmax` will return
     """
-    return Softmax() if x == None else Softmax().forward(x)
+    return Softmax() if x is None else Softmax().forward(x)
 
 
 def softmax_derivation(x: numpy.ndarray | list) -> numpy.ndarray:

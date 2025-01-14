@@ -64,7 +64,7 @@ def tanh(x: numpy.ndarray | list) -> Tanh | numpy.ndarray:
     Returns:
         numpy.ndarray: output of tanh(`x`)
     """
-    return Tanh() if x == None else Tanh().forward(x)
+    return Tanh() if x is None else Tanh().forward(x)
 
 
 def tanh_derivation(x: numpy.ndarray | list) -> numpy.ndarray:
