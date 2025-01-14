@@ -8,3 +8,5 @@ class NeuralNetworksErrors(LittleNeuErrors):
 class ActivationFunctionErrors(NeuralNetworksErrors):
     pass
 
+class InternalErrors(LittleNeuErrors):
+    pass
