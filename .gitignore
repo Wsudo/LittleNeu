@@ -172,4 +172,5 @@ cython_debug/
 
 # region May Git Ignore
 .route-map.txt
+tmp_tests.py
 # end region My Git Ignore
