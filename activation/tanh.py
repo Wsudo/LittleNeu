@@ -7,7 +7,13 @@ class Tanh(ActivationFunction):
     """The tanh function outputs values in the range `(−1,1)`, making it centered around zero, which can be beneficial in some network architectures.
 
     Args:
-        ActivationFunction (_type_): _description_
+        x (numpy.ndarray | list): input to the function
+
+    Raises:
+        ValueError: if `x` is not in (list, numpy.ndarray) types
+
+    Returns:
+        numpy.ndarray: output of tanh(`x`)
     """
 
     def __init__(self):
@@ -43,7 +49,6 @@ class Tanh(ActivationFunction):
             numpy.ndarray: derivation of the `tanh(x)` = `1 - tanh(x)**2`
         """
         return 1 - numpy.tanh(x) ** 2
-
 
 
 def tanh(x: numpy.ndarray | list) -> Tanh | numpy.ndarray:
