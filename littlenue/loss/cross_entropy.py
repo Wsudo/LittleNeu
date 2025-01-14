@@ -10,7 +10,6 @@ class CrossEntropyLoss(ClassificationLossFunction):
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -34,7 +33,6 @@ class CrossEntropyLoss(ClassificationLossFunction):
         Args:
             y_true (numpy.ndarray | list): true values
             y_pred (numpy.ndarray | list): network generated values
-            delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
         Raises:
             ValueError: when y_true is not type (list , numpy.ndarray)
@@ -68,7 +66,6 @@ class CategoricalCrossEntropyLoss(ClassificationLossFunction):
         Args:
             y_true (numpy.ndarray | list): true values
             y_pred (numpy.ndarray | list): network generated values
-            delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
         Raises:
             ValueError: when y_true is not type (list , numpy.ndarray)
@@ -93,7 +90,6 @@ class CategoricalCrossEntropyLoss(ClassificationLossFunction):
             Args:
                 y_true (numpy.ndarray | list): true values
                 y_pred (numpy.ndarray | list): network generated values
-                delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
             Raises:
                 ValueError: when y_true is not type (list , numpy.ndarray)
@@ -126,7 +122,6 @@ class SparseCategoricalCrossEntropyLoss(ClassificationLossFunction):
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -149,7 +144,6 @@ class SparseCategoricalCrossEntropyLoss(ClassificationLossFunction):
         Args:
             y_true (numpy.ndarray | list): true values
             y_pred (numpy.ndarray | list): network generated values
-            delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
         Raises:
             ValueError: when y_true is not type (list , numpy.ndarray)
@@ -184,7 +178,6 @@ class MultiLabelCrossEntropyLoss(ClassificationLossFunction, MultiLabelLossFunct
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -209,7 +202,6 @@ class MultiLabelCrossEntropyLoss(ClassificationLossFunction, MultiLabelLossFunct
         Args:
             y_true (numpy.ndarray | list): true values
             y_pred (numpy.ndarray | list): network generated values
-            delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
         Raises:
             ValueError: when y_true is not type (list , numpy.ndarray)
@@ -307,7 +299,6 @@ class BinaryCrossEntropyLoss(CrossEntropyLoss):
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -327,7 +318,6 @@ class SCCrossEntropyLoss(SparseCategoricalCrossEntropyLoss):
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -351,7 +341,6 @@ def cross_entropy_loss(
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -373,7 +362,6 @@ def binary_cross_entropy_loss(
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -396,7 +384,6 @@ def categorical_cross_entropy_loss(
         Args:
             y_true (numpy.ndarray | list): true values
             y_pred (numpy.ndarray | list): network generated values
-            delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
         Raises:
             ValueError: when y_true is not type (list , numpy.ndarray)
@@ -417,7 +404,6 @@ def sparse_categorical_cross_entropy_loss(
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -438,7 +424,6 @@ def sc_cross_entropy_loss(
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -461,7 +446,6 @@ def multilabel_cross_entropy_loss(
     Args:
         y_true (numpy.ndarray | list): true values
         y_pred (numpy.ndarray | list): network generated values
-        delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
         ValueError: when y_true is not type (list , numpy.ndarray)
@@ -473,7 +457,7 @@ def multilabel_cross_entropy_loss(
     return MultiLabelCrossEntropyLoss() if y_true is None and y_pred is None else MultiLabelCrossEntropyLoss().calc(y_true, y_pred)
 
 
-def multilabel_cross_entropy_loss(
+def weighted_cross_entropy_loss(
     y_true: numpy.ndarray | list = None,
     y_pred: numpy.ndarray | list = None,
     class_weights: numpy.ndarray | list = None,
