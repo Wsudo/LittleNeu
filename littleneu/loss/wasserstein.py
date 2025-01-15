@@ -45,8 +45,6 @@ class WassersteinLoss(GenerativeLossFunction):
         """
         if not isinstance(y_true, numpy.ndarray) and not isinstance(y_true, list):
             raise ValueError(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
-        if not isinstance(y_pred, numpy.ndarray) and not isinstance(y_pred, list):
-            raise ValueError(f"{type(self)}.calc 'y_pred' argument must be type (list , numpy.ndarray) , {type(y_pred)} passed !")
 
         real_y_true = y_true if isinstance(y_true, numpy.ndarray) else numpy.array(y_true)
         # real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
