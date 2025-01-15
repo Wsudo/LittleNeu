@@ -48,7 +48,7 @@ class KLLoss(ClassificationLossFunction):
         real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
 
         real_y_true = numpy.clip(real_y_true, 1e-15, 1)  # True distribution
-        real_y_pred = numpy.clip(q, 1e-15, 1)  # Predicted distribution
+        real_y_pred = numpy.clip(real_y_pred, 1e-15, 1)  # Predicted distribution
 
         # Calculate KL Divergence: D_KL(P || Q) = sum(P(i) * log(P(i) / Q(i)))
         kl_div = numpy.sum(real_y_true * numpy.log(real_y_true / real_y_pred))
