@@ -2,6 +2,7 @@ import numpy
 
 from .activation_function import ActivationFunction
 
+from ..errors import ActivationErrors
 
 class Tanh(ActivationFunction):
     """The tanh function outputs values in the range `(−1,1)`, making it centered around zero, which can be beneficial in some network architectures.
@@ -10,7 +11,7 @@ class Tanh(ActivationFunction):
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of tanh(`x`)
@@ -26,13 +27,13 @@ class Tanh(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of tanh(`x`)
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         return numpy.tanh(x if isinstance(x, numpy.ndarray) else numpy.array(x))
 
@@ -43,7 +44,7 @@ class Tanh(ActivationFunction):
             x (numpy.ndarray | list): the input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: derivation of the `tanh(x)` = `1 - tanh(x)**2`
@@ -58,7 +59,7 @@ def tanh(x: numpy.ndarray | list) -> Tanh | numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
         Tanh: if `x == None` the object of `Tanh` will return
 
     Returns:
@@ -74,7 +75,7 @@ def tanh_derivation(x: numpy.ndarray | list) -> numpy.ndarray:
         x (numpy.ndarray | list): the input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of the `tanh(x)` = `1 - tanh(x)**2`

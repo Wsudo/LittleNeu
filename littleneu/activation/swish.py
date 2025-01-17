@@ -4,6 +4,7 @@ from .activation_function import ActivationFunction
 
 from .sigmoid import Sigmoid
 
+from ..errors import ActivationErrors
 
 class Swish(ActivationFunction):
     """The Swish function is a smooth, non-monotonic function and has been shown to improve the performance of deep networks in some cases.
@@ -12,7 +13,7 @@ class Swish(ActivationFunction):
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `Swish(x)`
@@ -28,13 +29,13 @@ class Swish(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of the `Swish(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
 
@@ -47,13 +48,13 @@ class Swish(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: derivation of the `Swish(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         sig = Sigmoid.forward(real_x)
@@ -67,7 +68,7 @@ def swish(x: numpy.ndarray | list = None) -> Swish | numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `Swish(x)`
@@ -83,7 +84,7 @@ def swish_derivation(x: numpy.ndarray | list = None) -> numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of the `Swish(x)`

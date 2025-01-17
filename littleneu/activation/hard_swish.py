@@ -2,6 +2,7 @@ import numpy
 
 from .activation_function import ActivationFunction
 
+from ..errors import ActivationErrors
 
 class HardSwish(ActivationFunction):
     """The Hard Swish function is a piecewise approximation of the Swish function.
@@ -11,7 +12,7 @@ class HardSwish(ActivationFunction):
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `HardSwish(x)`
@@ -28,13 +29,13 @@ class HardSwish(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of the `HardSwish(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
 
@@ -49,13 +50,13 @@ class HardSwish(ActivationFunction):
             x (numpy.ndarray | list): input ot the function
 
         Raises:
-            ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: derivation of `HardSwish(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         return numpy.where((real_x >= -3) & (real_x <= 3), (real_x + 3) / 6 + 0.5, 0)
@@ -69,7 +70,7 @@ def hardswish(x: numpy.ndarray | list = None) -> HardSwish | numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `HardSwish(x)`
@@ -87,7 +88,7 @@ def hardswish_derivation(x: numpy.ndarray | list) -> numpy.ndarray:
         x (numpy.ndarray | list): input ot the function
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of `HardSwish(x)`
