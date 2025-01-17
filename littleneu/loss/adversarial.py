@@ -2,6 +2,7 @@ import numpy
 
 from .loss_function import GenerativeLossFunction
 
+from ..errors import LossErrors
 
 class AdversarialLoss(GenerativeLossFunction):
     """In Generative Adversarial Networks (GANs), the loss is derived from a min-max game between two networks: a generator (G) and a discriminator (D). The adversarial loss is designed to measure how well the generator is able to create data that mimics real data, and how well the discriminator distinguishes between real and fake data.
@@ -39,14 +40,14 @@ class AdversarialLoss(GenerativeLossFunction):
             is_generator (bool) : check loss in the generator model
 
         Raises:
-            ValueError: when y_true is not type (list , numpy.ndarray)
-            ValueError: when y_pred is not type (list , numpy.ndarray)
+            LossErrors: when y_true is not type (list , numpy.ndarray)
+            LossErrors: when y_pred is not type (list , numpy.ndarray)
 
         Returns:
             numpy.ndarray: loss between `True Values` and `Predicted Values`
         """
         if not isinstance(y_true, numpy.ndarray) and not isinstance(y_true, list):
-            raise ValueError(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
         real_y_true = y_true if isinstance(y_true, numpy.ndarray) else numpy.array(y_true)
         # real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
 

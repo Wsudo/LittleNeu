@@ -2,6 +2,7 @@ import numpy
 
 from .loss_function import MetricLearningLossFunction
 
+from ..errors import LossErrors
 
 class TripletLoss(MetricLearningLossFunction):
     """Triplet Loss is commonly used in metric learning to learn embeddings that minimize the distance between similar samples (anchor and positive) while maximizing the distance between dissimilar samples (anchor and negative).
@@ -13,10 +14,10 @@ class TripletLoss(MetricLearningLossFunction):
         alpha (float):Margin between positive and negative distances (default 0.2)
 
     Raises:
-        ValueError: when anchor is not type (list , numpy.ndarray)
-        ValueError: when positive is not type (list , numpy.ndarray)
-        ValueError: when negative is not type (list , numpy.ndarray)
-        ValueError: when alpha is not type (float)
+        LossErrors: when anchor is not type (list , numpy.ndarray)
+        LossErrors: when positive is not type (list , numpy.ndarray)
+        LossErrors: when negative is not type (list , numpy.ndarray)
+        LossErrors: when alpha is not type (float)
 
     Returns:
         numpy.ndarray: the triplet loss value (scalar).
@@ -42,17 +43,17 @@ class TripletLoss(MetricLearningLossFunction):
             y (numpy.ndarray | list): (positive/negetive) Embedding of the positive/negetive sample (numpy array)
 
         Raises:
-            ValueError: when x is not type(list,numpy.ndarray)
-            ValueError: when y is not type(list,numpy.ndarray)
+            LossErrors: when x is not type(list,numpy.ndarray)
+            LossErrors: when y is not type(list,numpy.ndarray)
 
         Returns:
             numpy.ndarray: output of `Euclidean distance (x , y)`
         """
 
         if not isinstance(x, numpy.ndarray) and not isinstance(x, list):
-            raise ValueError(f"{type(self)}.calc 'x' argument must be type (list , numpy.ndarray) , {type(x)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'x' argument must be type (list , numpy.ndarray) , {type(x)} passed !")
         if not isinstance(y, numpy.ndarray) and not isinstance(y, list):
-            raise ValueError(f"{type(self)}.calc 'y' argument must be type (list , numpy.ndarray) , {type(y)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'y' argument must be type (list , numpy.ndarray) , {type(y)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         real_y = y if isinstance(y, numpy.ndarray) else numpy.array(y)
@@ -74,20 +75,20 @@ class TripletLoss(MetricLearningLossFunction):
             alpha (float):Margin between positive and negative distances (default 0.2)
 
         Raises:
-            ValueError: when anchor is not type (list , numpy.ndarray)
-            ValueError: when positive is not type (list , numpy.ndarray)
-            ValueError: when negative is not type (list , numpy.ndarray)
-            ValueError: when alpha is not type (float)
+            LossErrors: when anchor is not type (list , numpy.ndarray)
+            LossErrors: when positive is not type (list , numpy.ndarray)
+            LossErrors: when negative is not type (list , numpy.ndarray)
+            LossErrors: when alpha is not type (float)
 
         Returns:
             numpy.ndarray: the triplet loss value (scalar).
         """
         if not isinstance(anchor, numpy.ndarray) and not isinstance(anchor, list):
-            raise ValueError(f"{type(self)}.calc 'anchor' argument must be type (list , numpy.ndarray) , {type(anchor)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'anchor' argument must be type (list , numpy.ndarray) , {type(anchor)} passed !")
         if not isinstance(positive, numpy.ndarray) and not isinstance(positive, list):
-            raise ValueError(f"{type(self)}.calc 'positive' argument must be type (list , numpy.ndarray) , {type(positive)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'positive' argument must be type (list , numpy.ndarray) , {type(positive)} passed !")
         if not isinstance(negative, numpy.ndarray) and not isinstance(negative, list):
-            raise ValueError(f"{type(self)}.calc 'negative' argument must be type (list , numpy.ndarray) , {type(negative)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'negative' argument must be type (list , numpy.ndarray) , {type(negative)} passed !")
 
         real_anchor = anchor if isinstance(anchor, numpy.ndarray) else numpy.array(anchor)
         real_positive = positive if isinstance(positive, numpy.ndarray) else numpy.array(positive)
@@ -118,10 +119,10 @@ def triplet_loss(
         alpha (float):Margin between positive and negative distances (default 0.2)
 
     Raises:
-        ValueError: when anchor is not type (list , numpy.ndarray)
-        ValueError: when positive is not type (list , numpy.ndarray)
-        ValueError: when negative is not type (list , numpy.ndarray)
-        ValueError: when alpha is not type (float)
+        LossErrors: when anchor is not type (list , numpy.ndarray)
+        LossErrors: when positive is not type (list , numpy.ndarray)
+        LossErrors: when negative is not type (list , numpy.ndarray)
+        LossErrors: when alpha is not type (float)
 
     Returns:
         numpy.ndarray: the triplet loss value (scalar).
