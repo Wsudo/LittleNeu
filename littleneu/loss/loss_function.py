@@ -1,6 +1,6 @@
 import numpy
 
-from ..errors import LittleNeuNotImplementedError
+from ..errors import NotImplementedErrors
 
 class LossFunction:
     
@@ -12,7 +12,7 @@ class LossFunction:
             y_true:numpy.ndarray|list,
             y_pred:numpy.ndarray|list,
     ) -> numpy.ndarray:
-        raise LittleNeuNotImplementedError(f"calc method not implemented for {type(self)} loss function.")
+        raise NotImplementedErrors(f"calc method not implemented for {type(self)} loss function.")
 
 class RegressionLossFunction(LossFunction):
     pass

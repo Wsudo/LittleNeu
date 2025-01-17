@@ -2,6 +2,7 @@ import numpy
 
 from .loss_function import RegressionLossFunction
 
+from ..errors import LossErrors
 
 class HuberLoss(RegressionLossFunction):
     """Huber Loss is a combination of Mean Squared Error (MSE) and Mean Absolute Error (MAE), which is less sensitive to outliers in data compared to MSE.
@@ -12,8 +13,8 @@ class HuberLoss(RegressionLossFunction):
         delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
@@ -37,16 +38,16 @@ class HuberLoss(RegressionLossFunction):
             delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
         Raises:
-            ValueError: when y_true is not type (list , numpy.ndarray)
-            ValueError: when y_pred is not type (list , numpy.ndarray)
+            LossErrors: when y_true is not type (list , numpy.ndarray)
+            LossErrors: when y_pred is not type (list , numpy.ndarray)
 
         Returns:
             numpy.ndarray: loss between `True Values` and `Predicted Values`
         """
         if not isinstance(y_true, numpy.ndarray) and not isinstance(y_true, list):
-            raise ValueError(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
         if not isinstance(y_pred, numpy.ndarray) and not isinstance(y_pred, list):
-            raise ValueError(f"{type(self)}.calc 'y_pred' argument must be type (list , numpy.ndarray) , {type(y_pred)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'y_pred' argument must be type (list , numpy.ndarray) , {type(y_pred)} passed !")
 
         real_y_true = y_true if isinstance(y_true, numpy.ndarray) else numpy.array(y_true)
         real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
@@ -69,8 +70,8 @@ def huber_loss(
         delta (float):is a threshold that defines the point where the loss function transitions from quadratic to linear.
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`

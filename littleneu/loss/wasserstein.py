@@ -2,6 +2,7 @@ import numpy
 
 from .loss_function import GenerativeLossFunction
 
+from ..errors import LossErrors
 
 class WassersteinLoss(GenerativeLossFunction):
     """Wasserstein Loss (WGAN) is a modification of the original GAN loss that aims to address some issues such as the vanishing gradient problem. Instead of using the standard binary cross-entropy loss, Wasserstein GAN uses the Wasserstein distance (also known as Earth Mover's Distance) between the real and generated data distributions.
@@ -11,8 +12,8 @@ class WassersteinLoss(GenerativeLossFunction):
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
@@ -37,14 +38,14 @@ class WassersteinLoss(GenerativeLossFunction):
             is_generator (bool) : check loss in the generator model
 
         Raises:
-            ValueError: when y_true is not type (list , numpy.ndarray)
-            ValueError: when y_pred is not type (list , numpy.ndarray)
+            LossErrors: when y_true is not type (list , numpy.ndarray)
+            LossErrors: when y_pred is not type (list , numpy.ndarray)
 
         Returns:
             numpy.ndarray: loss between `True Values` and `Predicted Values`
         """
         if not isinstance(y_true, numpy.ndarray) and not isinstance(y_true, list):
-            raise ValueError(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
 
         real_y_true = y_true if isinstance(y_true, numpy.ndarray) else numpy.array(y_true)
         # real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
@@ -69,8 +70,8 @@ class WGANLoss(WassersteinLoss):
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
@@ -92,8 +93,8 @@ def adversarial_loss(
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
@@ -113,8 +114,8 @@ def wgan_loss(
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`

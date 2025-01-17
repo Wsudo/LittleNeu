@@ -2,6 +2,7 @@ import numpy
 
 from .loss_function import MetricLearningLossFunction
 
+from ..errors import LossErrors
 
 class ContrastiveLoss(MetricLearningLossFunction):
     """Contrastive Loss is commonly used in metric learning tasks to learn an embedding space where similar pairs of examples are closer, and dissimilar pairs are farther apart. It's typically used for Siamese Networks or triplet-based architectures.
@@ -70,17 +71,17 @@ class ContrastiveLoss(MetricLearningLossFunction):
             margin (float):Margin for dissimilar pairs (default 1.0)
 
         Raises:
-            ValueError: when y_true is not type (list , numpy.ndarray)
-            ValueError: when y_pred is not type (list , numpy.ndarray)
-            ValueError: when margin is not type (float)
+            LossErrors: when y_true is not type (list , numpy.ndarray)
+            LossErrors: when y_pred is not type (list , numpy.ndarray)
+            LossErrors: when margin is not type (float)
 
         Returns:
             numpy.ndarray: the Contrastive loss value (scalar).
         """
         if not isinstance(y_true, numpy.ndarray) and not isinstance(y_true, list):
-            raise ValueError(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'y_true' argument must be type (list , numpy.ndarray) , {type(y_true)} passed !")
         if not isinstance(y_pred, numpy.ndarray) and not isinstance(y_pred, list):
-            raise ValueError(f"{type(self)}.calc 'y_pred' argument must be type (list , numpy.ndarray) , {type(y_pred)} passed !")
+            raise LossErrors(f"{type(self)}.calc 'y_pred' argument must be type (list , numpy.ndarray) , {type(y_pred)} passed !")
 
         real_y_true = y_true if isinstance(y_true, numpy.ndarray) else numpy.array(y_true)
         real_y_pred = y_pred if isinstance(y_pred, numpy.ndarray) else numpy.array(y_pred)
