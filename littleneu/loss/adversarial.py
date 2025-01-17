@@ -13,8 +13,8 @@ class AdversarialLoss(GenerativeLossFunction):
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
@@ -77,8 +77,8 @@ class AGANLoss(AdversarialLoss):
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
@@ -101,8 +101,8 @@ def adversarial_loss(
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
@@ -123,8 +123,8 @@ def agan_loss(
         is_generator (bool) : check loss in the generator model
 
     Raises:
-        ValueError: when y_true is not type (list , numpy.ndarray)
-        ValueError: when y_pred is not type (list , numpy.ndarray)
+        LossErrors: when y_true is not type (list , numpy.ndarray)
+        LossErrors: when y_pred is not type (list , numpy.ndarray)
 
     Returns:
         numpy.ndarray: loss between `True Values` and `Predicted Values`
