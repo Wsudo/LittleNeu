@@ -5,11 +5,14 @@ class LittleNeuErrors(Exception , BaseException):
 class NeuralNetworksErrors(LittleNeuErrors):
     pass
 
-class ActivationFunctionErrors(NeuralNetworksErrors):
+class ActivationErrors(NeuralNetworksErrors):
+    pass
+
+class LossErrors(NeuralNetworksErrors):
     pass
 
 class InternalErrors(LittleNeuErrors):
     pass
 
-class LittleNeuNotImplementedError(LittleNeuErrors):
+class NotImplementedErrors(LittleNeuErrors):
     pass
