@@ -2,6 +2,7 @@ import numpy
 
 from .activation_function import ActivationFunction
 
+from ..errors import ActivationErrors
 
 class Softmax(ActivationFunction):
     """Softmax transforms the raw input values (often referred to as logits) into probabilities. The output values are in the range `[0,1]` and sum up to 1, which is useful for multiclass classification problems.
@@ -12,7 +13,7 @@ class Softmax(ActivationFunction):
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `Softmax(x)`
@@ -30,13 +31,13 @@ class Softmax(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of the `Softmax(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         exp_x = numpy.exp(real_x - numpy.max(real_x))
@@ -50,13 +51,13 @@ class Softmax(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: derivation of `Softmax(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         s = self.forward(real_x)  # Apply softmax to get probabilities
@@ -73,7 +74,7 @@ def softmax(x: numpy.ndarray | list = None) -> Softmax | numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `Softmax(x)`
@@ -90,7 +91,7 @@ def softmax_derivation(x: numpy.ndarray | list) -> numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of `Softmax(x)`

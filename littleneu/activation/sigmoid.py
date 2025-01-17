@@ -2,6 +2,7 @@ import numpy
 
 from .activation_function import ActivationFunction
 
+from ..errors import ActivationErrors
 
 class Sigmoid(ActivationFunction):
     """The Sigmoid function outputs values in the range `(0,1)`, often used for binary classification or as the output layer activation in neural networks.
@@ -10,7 +11,7 @@ class Sigmoid(ActivationFunction):
         x (numpy.ndarray | list): a input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of sigmoid(`x`) in range `(0,1)`
@@ -26,13 +27,13 @@ class Sigmoid(ActivationFunction):
             x (numpy.ndarray | list): a input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of sigmoid(`x`) in range `(0,1)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         return 1 / (1 + numpy.exp(-(x if isinstance(x, numpy.ndarray) else numpy.array(x))))
 
@@ -43,13 +44,13 @@ class Sigmoid(ActivationFunction):
             x (numpy.ndarray | list): a input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: derivation of `x`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.derivate 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.derivate 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         sig_x = self.forward(x)
 
@@ -63,7 +64,7 @@ def sigmoid(x: numpy.ndarray | list = None) -> Sigmoid | numpy.ndarray:
         x (numpy.ndarray | list): a input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of sigmoid(`x`) in range `(0,1)`
@@ -79,7 +80,7 @@ def sigmoid_derivate(x: numpy.ndarray | list) -> numpy.ndarray:
         x (numpy.ndarray | list): a input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of `x`

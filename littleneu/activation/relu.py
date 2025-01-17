@@ -2,6 +2,7 @@ import numpy
 
 from .activation_function import ActivationFunction
 
+from ..errors import ActivationErrors
 
 class Relu(ActivationFunction):
     """The ReLU activation function sets all negative values to zero and keeps all positive values as they are. It is one of the most widely used activation functions in neural networks due to its simplicity and effectiveness.
@@ -10,7 +11,7 @@ class Relu(ActivationFunction):
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `Relu(x)` == `max(0,x)`
@@ -26,13 +27,13 @@ class Relu(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of the `Relu(x)` == `max(0,x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.derivate 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.derivate 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         return numpy.maximum(0, x if isinstance(x, numpy.ndarray) else numpy.array(x))
 
@@ -43,13 +44,13 @@ class Relu(ActivationFunction):
             x (numpy.ndarray | list): input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: derivation of the `Relu(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.derivate 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.derivate 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         return numpy.where((x if isinstance(x, numpy.ndarray) else numpy.array(x)) > 0, 1, 0)
 
@@ -61,7 +62,7 @@ def relu(x: numpy.ndarray | list = None) -> Relu | numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `Relu(x)` == `max(0,x)`
@@ -76,7 +77,7 @@ def relu_derivation(x: numpy.ndarray | list) -> numpy.ndarray:
         x (numpy.ndarray | list): input to the function
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of the `Relu(x)`

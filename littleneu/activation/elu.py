@@ -2,6 +2,7 @@ import numpy
 
 from .activation_function import ActivationFunction
 
+from ..errors import ActivationErrors
 
 class ELU(ActivationFunction):
     """The ELU activation function is used to allow the model to learn faster and perform better by reducing the bias shift. It has a smooth curve for negative values, unlike ReLU, which cuts off at zero.
@@ -11,7 +12,7 @@ class ELU(ActivationFunction):
         alpha(float) : the alpha value , `commanly(1.0)`
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `ELU(x)`
@@ -30,13 +31,13 @@ class ELU(ActivationFunction):
             alpha(float) : the alpha value , `commanly(1.0)`
 
         Raises:
-            ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of the `ELU(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         return numpy.where(real_x > 0, real_x, self.alpha * (numpy.exp(real_x) - 1))
@@ -49,13 +50,13 @@ class ELU(ActivationFunction):
             alpha(float) : the alpha value , `commanly(1.0)`
 
         Raises:
-            ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: derivation of `ELU(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         return numpy.where(real_x > 0, 1, self.alpha * numpy.exp(real_x))
@@ -69,7 +70,7 @@ class ExponentialLinearUnit(ELU):
         alpha(float) : the alpha value , `commanly(1.0)`
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `ELU(x)`
@@ -87,7 +88,7 @@ def elu(x: numpy.ndarray | list = None, alpha: float = 1.0) -> ELU | numpy.ndarr
         alpha(float) : the alpha value , `commanly(1.0)`
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `ELU(x)`
@@ -104,7 +105,7 @@ def elu_derivation(x: numpy.ndarray | list, alpha: float = 1.0) -> numpy.ndarray
         alpha(float) : the alpha value , `commanly(1.0)`
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of `ELU(x)`
@@ -120,7 +121,7 @@ def exponential_linear_unit(x: numpy.ndarray | list = None, alpha: float = 1.0) 
         alpha(float) : the alpha value , `commanly(1.0)`
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the `ELU(x)`
@@ -137,7 +138,7 @@ def exponential_linear_unit_derivation(x: numpy.ndarray | list, alpha: float = 1
         alpha(float) : the alpha value , `commanly(1.0)`
 
     Raises:
-        ValueError: ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: derivation of `ELU(x)`

@@ -2,6 +2,7 @@ import numpy
 
 from .activation_function import ActivationFunction
 
+from ..errors import ActivationErrors
 
 class PRelu(ActivationFunction):
     """In PReLU, the parameter αα (which is typically learned during training) is a constant that defines the slope for negative inputs. This allows the model to adaptively learn the best slope for negative values.
@@ -11,7 +12,7 @@ class PRelu(ActivationFunction):
         alpha (float): the `α(alpha)` value , `(commonly 0.1)`.
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the function `PRelu(x)`
@@ -29,13 +30,13 @@ class PRelu(ActivationFunction):
             alpha (float): the `α(alpha)` value , `(commonly 0.1)`.
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: output of the function `PRelu(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         return numpy.where(real_x > 0, real_x, self.alpha * real_x)
@@ -47,13 +48,13 @@ class PRelu(ActivationFunction):
             x (numpy.ndarray | list): the input to the function
 
         Raises:
-            ValueError: if `x` is not in (list, numpy.ndarray) types
+            ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
         Returns:
             numpy.ndarray: `derivation` of `PRelu(x)`
         """
         if not isinstance(x, list) and not isinstance(x, numpy.ndarray):
-            raise ValueError(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
+            raise ActivationErrors(f"{type(self)}.forward 'x' argument must be type of (list , numpy.ndarray) , {type(x)} passed !")
 
         real_x = x if isinstance(x, numpy.ndarray) else numpy.array(x)
         return numpy.where(real_x > 0, 1, self.alpha)
@@ -67,7 +68,7 @@ class ParametricRelu(PRelu):
         alpha (float): the `α(alpha)` value , `(commonly 0.1)`.
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the function `PRelu(x)`
@@ -84,7 +85,7 @@ def prelu(x: numpy.ndarray | list = None, alpha: float = 0.1) -> PRelu | numpy.n
         alpha (float): the `α(alpha)` value , `(commonly 0.1)`.
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the function `PRelu(x)`
@@ -100,7 +101,7 @@ def prelu_derivation(x: numpy.ndarray | list = None, alpha: float = 0.1) -> nump
         alpha (float): the `α(alpha)` value , `(commonly 0.1)`.
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: `derivation` of `PRelu(x)`
@@ -116,7 +117,7 @@ def parametric_relu(x: numpy.ndarray | list = None, alpha: float = 0.1) -> PRelu
         alpha (float): the `α(alpha)` value , `(commonly 0.1)`.
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: output of the function `PRelu(x)`
@@ -132,7 +133,7 @@ def parametric_relu_derivation(x: numpy.ndarray | list = None, alpha: float = 0.
         alpha (float): the `α(alpha)` value , `(commonly 0.1)`.
 
     Raises:
-        ValueError: if `x` is not in (list, numpy.ndarray) types
+        ActivationErrors: if `x` is not in (list, numpy.ndarray) types
 
     Returns:
         numpy.ndarray: `derivation` of `PRelu(x)`
